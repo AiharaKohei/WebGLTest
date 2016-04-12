@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>webgl</title>
+    <script src="minMatrix.js"></script>
+    <script src="main.js"></script>
+    <script id="vs" type="x-shader/x-vertex">
+      attribute vec3 position;
+      attribute vec2 texCoord;
+      uniform vec4 mvpMatrix;
+      varying vec2 vTexCoord;
+      void main(void)
+      {
+        vTexCoord = texCoord;
+        gl_Position = mvpMatrix * vec4(position, 1.0);
+      }
+    </script>
+    <script id="fs" type="x-shader/x-fragment">
+      precision mediump float;
+      uniform sampler2D texture;
+      varying vec2 vTexCoord;
+      void main(void){
+       gl_FragColor = texture2D(texture, vTexCoord);
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+  </body>
+</html>
